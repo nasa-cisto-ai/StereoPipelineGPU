@@ -41,6 +41,36 @@ parallel_stereo -t aster --subpixel-mode 3 ASTER_example/aster-Band3N.tif ASTER_
 point2dem -r earth --tr 0.0002777 out_stereo/run-PC.tif
 ```
 
+## Regression Test #1: Individual Steps
+
+No logs for Blend (Step 2) and Sub-pixel refinement (Step 3) calls. All other calls are listed below.
+Using each one of these algorithms on their own might be a better way of testing
+individual functionalities across the software.
+
+### Step 0 Preprocessing
+
+```bash
+stereo_pprc -t aster --subpixel-mode 3 --corr-seed-mode 1 --threads 10 ASTER_example/aster-Band3N.tif ASTER_example/aster-Band3B.tif ASTER_example/aster-Band3N.xml ASTER_example/aster-Band3B.xml out_stereo/run
+```
+
+### Step 1 Correlation
+
+```bash
+stereo_corr -t aster --subpixel-mode 3 --corr-seed-mode 1 --compute-low-res-disparity-only ASTER_example/aster-Band3N.tif ASTER_example/aster-Band3B.tif ASTER_example/aster-Band3N.xml ASTER_example/aster-Band3B.xml out_stereo/run
+```
+
+### Step 4 Outlier rejection
+
+```bash
+stereo_fltr -t aster --subpixel-mode 3 --corr-seed-mode 1 --threads 10 ASTER_example/aster-Band3N.tif ASTER_example/aster-Band3B.tif ASTER_example/aster-Band3N.xml ASTER_example/aster-Band3B.xml out_stereo/run
+```
+
+### Step 5 Triangulation
+
+```bash
+stereo_tri -t aster --subpixel-mode 3 --corr-seed-mode 1 --compute-point-cloud-center-only --threads 10 ASTER_example/aster-Band3N.tif ASTER_example/aster-Band3B.tif ASTER_example/aster-Band3N.xml ASTER_example/aster-Band3B.xml out_stereo/run
+```
+
 ## Software Development Dependencies
 
 We will need to develop and compile some of these modules given that the current
