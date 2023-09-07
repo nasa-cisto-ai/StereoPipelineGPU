@@ -1,0 +1,14 @@
+FROM nvcr.io/nvidia/nvhpc:23.7-devel-cuda_multi-ubuntu22.04
+
+# Ubuntu needs noninteractive to be forced
+ENV DEBIAN_FRONTEND noninteractive
+ENV PATH="${PATH}:/opt/StereoPipeline/bin"
+
+# Add binaries from ASP
+RUN cd /opt \
+    & wget https://github.com/NeoGeographyToolkit/StereoPipeline/releases/download/2023-09-03-daily-build/StereoPipeline-3.4.0-alpha-2023-09-03-x86_64-Linux.tar.bz2 \
+    & tar xvf StereoPipeline-3.4.0-alpha-2023-09-03-x86_64-Linux.tar.bz2 \
+    & mv StereoPipeline-3.4.0-alpha-2023-09-03-x86_64-Linux StereoPipeline \
+    & rm StereoPipeline-3.4.0-alpha-2023-09-03-x86_64-Linux.tar.bz2
+
+# Add anaconda environment next
