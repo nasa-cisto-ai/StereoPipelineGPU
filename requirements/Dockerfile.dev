@@ -2,13 +2,18 @@ FROM nvcr.io/nvidia/nvhpc:23.7-devel-cuda_multi-ubuntu22.04
 
 # Ubuntu needs noninteractive to be forced
 ENV DEBIAN_FRONTEND noninteractive
-ENV PATH="${PATH}:/opt/StereoPipeline/bin"
+ENV PATH="${PATH}:/opt/StereoPipeline/bin:/root/miniconda/bin"
 
 # Add binaries from ASP
 RUN cd /opt \
-    & wget https://github.com/NeoGeographyToolkit/StereoPipeline/releases/download/2023-09-03-daily-build/StereoPipeline-3.4.0-alpha-2023-09-03-x86_64-Linux.tar.bz2 \
-    & tar xvf StereoPipeline-3.4.0-alpha-2023-09-03-x86_64-Linux.tar.bz2 \
-    & mv StereoPipeline-3.4.0-alpha-2023-09-03-x86_64-Linux StereoPipeline \
-    & rm StereoPipeline-3.4.0-alpha-2023-09-03-x86_64-Linux.tar.bz2
+    && wget https://github.com/NeoGeographyToolkit/StereoPipeline/releases/download/2023-09-03-daily-build/StereoPipeline-3.4.0-alpha-2023-09-03-x86_64-Linux.tar.bz2 \
+    && tar xvf StereoPipeline-3.4.0-alpha-2023-09-03-x86_64-Linux.tar.bz2 \
+    && mv StereoPipeline-3.4.0-alpha-2023-09-03-x86_64-Linux StereoPipeline \
+    && rm StereoPipeline-3.4.0-alpha-2023-09-03-x86_64-Linux.tar.bz2
 
 # Add anaconda environment next
+RUN apt-get update \
+    && apt-get install -y wget \
+    && rm -rf /var/lib/apt/lists/* \
+    && wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh \
+    && bash ~/miniconda.sh -b -p $HOME/miniconda
