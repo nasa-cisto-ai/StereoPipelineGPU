@@ -69,8 +69,8 @@ add_custom_target(doxygen doxygen
 # Build GTest
 include_directories(../thirdparty/gtest/include)
 #include_directories(../thirdparty/gtest/)
-add_library(gtest      ../thirdparty/gtest/src/gtest-all.cc)
-add_library(gtest_main ../thirdparty/gtest/src/gtest_main.cc)
+add_library(gtest      ../thirdparty/gtest/src/gtest-all.cu)
+add_library(gtest_main ../thirdparty/gtest/src/gtest_main.cu)
 target_link_libraries(gtest_main gtest) 
 
 target_compile_definitions(gtest PRIVATE GTEST_USE_OWN_TR1_TUPLE=1)

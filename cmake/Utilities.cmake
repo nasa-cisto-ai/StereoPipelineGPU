@@ -11,6 +11,7 @@ function(get_all_source_files relativePath outputFileList)
       "${CMAKE_CURRENT_SOURCE_DIR}/${relativePath}/*.cpp"
       "${CMAKE_CURRENT_SOURCE_DIR}/${relativePath}/*.cxx"      
       "${CMAKE_CURRENT_SOURCE_DIR}/${relativePath}/*.tcc"
+      "${CMAKE_CURRENT_SOURCE_DIR}/${relativePath}/*.cu"
   )
   set(fileList) # Empty list
   foreach(f ${TEMP}) # Iterate through TEMP
@@ -160,7 +161,7 @@ function(add_library_wrapper libName fileList testFileList dependencyList)
 
 
   # Add unit test for each test file given
-  set(TEST_MAIN_PATH "${CMAKE_SOURCE_DIR}/src/test/test_main.cc")
+  set(TEST_MAIN_PATH "${CMAKE_SOURCE_DIR}/src/test/test_main.cu")
   foreach(f ${testFileList})
 
     get_filename_component(filename ${f} NAME_WE) # Get file name without extension

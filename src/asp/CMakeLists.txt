@@ -3,6 +3,21 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}" )
 
 include(Utilities) # Contains functions
 
+# Trying to fix threads with nvhpc
+set(CMAKE_THREAD_LIBS_INIT "-lpthread")
+set(CMAKE_HAVE_THREADS_LIBRARY 1)
+set(CMAKE_USE_WIN32_THREADS_INIT 0)
+set(CMAKE_USE_PTHREADS_INIT 1)
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+
+# Trying to fix openmp with nvhpc
+set(OpenMP_C_FLAGS "-fopenmp")
+set(OpenMP_C_LIB_NAMES "gomp;pthread")
+set(OpenMP_gomp_LIBRARY "/usr/lib/gcc/x86_64-redhat-linux/8/libgomp.so")
+set(OpenMP_pthread_LIBRARY "/usr/lib64/libpthread.so")
+set(OpenMP_CXX_FLAGS "-fopenmp")
+set(OpenMP_CXX_LIB_NAMES "gomp;pthread")
+
 # Configuration options
 
 # Directory paths
