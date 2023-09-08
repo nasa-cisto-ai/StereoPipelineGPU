@@ -83,5 +83,11 @@ StereoPipeline software comes as a binary. The development environment looks as 
 
 ### Anaconda Environment
 
+Installing local anaconda environment on NAS
+
 ```bash
+conda env create -n asp_deps -f asp_deps_3.3.0_linux_env.yaml
+source activate asp_deps
+conda install -c conda-forge compilers
+conda install -c conda-forge "cmake>=3.15.5" pbzip2 chrpath
 ```
