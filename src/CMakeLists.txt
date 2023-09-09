@@ -21,7 +21,7 @@ endif()
 #===============================================================================
 # Project information
 
-project (StereoPipeline)
+project (StereoPipeline C CXX CUDA)
 
 # The line below is used by the docs/ so don't change it
 # without testing the result.  Versioning is based on https://semver.org

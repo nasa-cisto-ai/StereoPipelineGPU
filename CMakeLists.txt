@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.15.5)
 
-project(StereoPipeline)
+project(StereoPipeline C CXX CUDA)
 
 if(APPLE)
     # Needed for conda build on OSX with conda
