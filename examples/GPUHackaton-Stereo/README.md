@@ -91,3 +91,26 @@ source activate asp_deps
 conda install -c conda-forge compilers
 conda install -c conda-forge "cmake>=3.15.5" pbzip2 chrpath
 ```
+
+### Mamba Environment
+
+Installing local micromamba env on NCCS PRISM GPU compute node
+
+```bash
+module load cmake
+module load mamba
+module load nvidia
+
+mkdir /explore/nobackup/people/<userID>/micromamba
+ln -s /explore/nobackup/people/<userID>/micromamba ~/micromamba
+
+mamba config set channel_priority flexible
+mamba create -n aspv2 -f asp_deps_3.3.0_linux_env.yaml
+
+eval "$(micromamba shell hook --shell=bash)"
+
+micromamba activate aspv2
+
+mamba install -c conda-forge compilers
+mamba install -c conda-forge "cmake>=3.15.5" pbzip2 chrpath
+```
